@@ -6,7 +6,7 @@
 
 ## The Original Pyramid and Why It Still Holds
 
-Mike Cohn's test pyramid (2009) proposed a simple model: write many unit tests, fewer integration tests, and even fewer end-to-end tests. The rationale was speed and cost — unit tests are fast and cheap; E2E tests are slow and brittle.
+Mike Cohn's test pyramid (2009) proposed a simple model: write many unit tests, fewer integration tests, and even fewer end-to-end tests. The rationale was speed and cost, unit tests are fast and cheap; E2E tests are slow and brittle.
 
 The core insight remains valid. What has changed is the vocabulary, the layers, and how the pyramid applies to modern distributed systems.
 
@@ -54,22 +54,22 @@ Pure function testing. No I/O, no network, no database. Tests a single function 
 *Example: Test that a price calculation function returns the correct value for given inputs.*
 
 **Component Tests**
-A single service tested in isolation with all external dependencies mocked or stubbed. Verifies the service's internal behavior — routing, business logic, error handling — without touching real infrastructure. Runtime: seconds.
+A single service tested in isolation with all external dependencies mocked or stubbed. Verifies the service's internal behavior, routing, business logic, error handling without touching real infrastructure. Runtime: seconds.
 
 *Example: Test that the UserService correctly handles a 404 from the upstream users API, returning an appropriate error response.*
 
 **Integration Tests**
-A service tested with its real dependencies — real database, real cache, real message queue — but other services still mocked. Verifies that the service integrates correctly with its infrastructure. Runtime: seconds to low minutes.
+A service tested with its real dependencies as real database, real cache, real message queue but other services still mocked. Verifies that the service integrates correctly with its infrastructure. Runtime: seconds to low minutes.
 
 *Example: Test that creating a user via the API correctly persists to the database and publishes an event to the queue.*
 
 **Contract Tests**
-Schema and behavioral contracts at service boundaries. Verify that the interface between two services remains stable — without requiring both services to be running simultaneously. This is the layer that enables independent deployability. Runtime: fast (no network calls to the real service).
+Schema and behavioral contracts at service boundaries. Verify that the interface between two services remains stable, without requiring both services to be running simultaneously. This is the layer that enables independent deployability. Runtime: fast (no network calls to the real service).
 
 *Example: Verify that the response from GET /users/:id matches the UserSchema contract that downstream services depend on.*
 
 **End-to-End Tests**
-Full stack tests that exercise the system as a real user would — real services, real infrastructure, real browser or API client. Should cover critical paths only. Runtime: minutes.
+Full stack tests that exercise the system as a real user. Using real services, real infrastructure, real browser or API client. Should cover critical paths only. Runtime: minutes.
 
 *Example: A user can register, verify their email, log in, and complete a purchase.*
 
@@ -133,7 +133,7 @@ Nothing but unit tests. Fast suite, no confidence in system behavior.
 
 ## Applying This to Distributed Systems
 
-In a microservices architecture, every service has its own pyramid. The challenge is ensuring the pyramids connect at the seams — this is where contract testing becomes critical.
+In a microservices architecture, every service has its own pyramid. The challenge is ensuring the pyramids connect at the seams, this is where contract testing becomes critical.
 
 ```
 Service A pyramid     Service B pyramid
